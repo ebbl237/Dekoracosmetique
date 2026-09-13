@@ -1,33 +1,52 @@
-# DÉKORA — Marketplace & Cockpit Administration V14
+# DÉKORA COSMÉTIQUES — Front Office + Back Office
 
-Prototype statique avant Firebase.
+Prototype marketplace DÉKORA avec un Front Office public et un Back Office administrateur dans le même dépôt.
 
-## V14 — Studio système
-Le back-office dispose maintenant d’une véritable console de configuration :
-- identité DÉKORA et logo texte/image ;
-- import d’un logo et aperçu ;
-- couleurs globales (violet, corail, or, crème, texte) ;
-- topbar et couleurs de topbar ;
-- hero : sur-titre, titre, sous-titre, texte, boutons, image URL/import ;
-- suppression explicite du logo image et de l’image Hero ;
-- navigation éditable ;
-- visibilité des sections : Hero, réassurance, catégories, boutique, routine, suivi, conseils, contact, newsletter, footer ;
-- textes des sections principales et du footer ;
-- aperçu visuel et indicateurs du catalogue ;
-- mise en page responsive avec rail de commande, cartes séparées et prévention des chevauchements.
+## Structure
 
-## V13 conservé
-- gestion produits : création, modification, publication, suppression ;
-- catégories et promotions ;
-- articles & conseils : création, modification, publication/brouillon, suppression ;
-- CMS contenu ;
-- cockpit, finance, commandes, stocks, clients ;
-- authentification admin locale.
+```text
+DEKORA/
+├── index.html              # Front Office — boutique
+├── admin/
+│   ├── login.html          # Connexion administrateur
+│   └── index.html          # Back Office — gestion du site
+├── .nojekyll
+├── .gitignore
+└── README.md
+```
 
-## Données
-Le prototype utilise `localStorage` pour partager les réglages entre storefront et back-office dans le même navigateur.
-Firebase devra remplacer ce stockage local pour obtenir une configuration centralisée et partagée par tous les visiteurs.
+## Fonctions CMS V13
 
-## URLs GitHub Pages
-- Boutique : https://ebbl237.github.io/Dekoracosmetique/
-- Administration : https://ebbl237.github.io/Dekoracosmetique/admin/login.html
+- Ajout / modification / suppression définitive des produits.
+- Publication / brouillon des produits.
+- Modification des prix, promotions, stock, SKU, catégorie et image produit.
+- Création / modification / suppression des catégories.
+- Création / modification / publication / suppression des articles et conseils.
+- Changement de l'image Hero par URL ou import local.
+- Changement de la couleur de la topbarre et de la couleur de son texte.
+- Gestion des textes du Hero, navigation, blocs de confiance, catégories, routine, suivi, conseils, contact, newsletter et footer.
+- Les changements CMS sont écrits dans `localStorage` et reflétés sur le Front Office dans le même navigateur/origine.
+- Responsive desktop / tablette / mobile.
+
+## Important
+
+Cette version reste un prototype HTML : les données CMS sont stockées dans le navigateur (`localStorage`). Pour que les modifications de l'administrateur soient réellement partagées entre tous les visiteurs et appareils, l'étape suivante est le branchement Firebase (Firestore + Storage + Auth).
+
+## GitHub Pages
+
+La publication doit utiliser la branche `main` et le dossier `/(root)`.
+
+Front Office : `https://ebbl237.github.io/Dekoracosmetique/`
+
+Administration : `https://ebbl237.github.io/Dekoracosmetique/admin/login.html`
+
+
+## V15 — CMS publication workflow
+- Brouillon séparé de la version publiée
+- Prévisualisation de la boutique dans une iframe avant publication
+- Validation explicite « Valider & publier »
+- Confirmation visuelle après publication
+- Gestion du logo, Hero, topbar, couleurs, navigation, visibilité et contenus
+- Diagnostic local des briques catalogue, favoris, panier, commandes, suivi, CMS, articles, promotions et catégories
+- Aperçu d'une fiche produit avant enregistrement
+- La version V15 reste un prototype local : localStorage/sessionStorage seront remplacés par Firebase pour la synchronisation multi-appareils.
