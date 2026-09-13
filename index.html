@@ -708,4 +708,34 @@ button,a{ -webkit-tap-highlight-color:transparent }
 })();
 </script>
 
+
+<style id="dekora-v13-front-cms">
+/* V13 CMS overrides */
+#conseils .tips-live{grid-template-columns:repeat(3,minmax(0,1fr))}
+#conseils .tip-card{background:#fffaf5;border:1px solid var(--line);border-radius:16px;overflow:hidden;padding:0 0 16px;box-shadow:var(--shadow)}
+#conseils .tip-card img{width:100%;height:190px;object-fit:cover;display:block;margin-bottom:12px}
+#conseils .tip-card .pill,#conseils .tip-card h3,#conseils .tip-card p{margin-left:16px;margin-right:16px}
+@media(max-width:900px){#conseils .tips-live{grid-template-columns:1fr 1fr!important}}@media(max-width:600px){#conseils .tips-live{grid-template-columns:1fr!important}}
+</style>
+<script id="dekora-v13-front-cms">
+(function(){
+ const read=(k,d)=>{try{const x=JSON.parse(localStorage.getItem(k)||'null');return x??d}catch(e){return d}};
+ const esc=x=>String(x??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+ const defaults={top1:'COSMÉTIQUES NATURELS & AUTHENTIQUES',top2:'FABRIQUÉ EN CÔTE D’IVOIRE · LIVRAISON EN CÔTE D’IVOIRE · PAIEMENT MOBILE MONEY',topbarColor:'#32135f',topbarTextColor:'#ffffff',heroEyebrow:'DÉKORA COSMÉTIQUE',heroTitle:'La nature au service de votre beauté.',heroText:'Découvrez les soins DÉKORA : naturels, efficaces et sensoriels, pensés pour votre peau au quotidien.',heroBtn1:'Découvrir nos produits →',heroBtn2:'Voir les coffrets',heroImage:'',categoriesTitle:'Nos catégories',categoriesText:'Trouvez rapidement le soin adapté à votre routine.',routineTitle:'Ma Routine DÉKORA',routineText:'Répondez à trois questions et obtenez une sélection de soins adaptée.',trackingTitle:'Suivre ma commande',trackingText:'Entrez votre référence DÉKORA.',tipsTitle:'Conseils beauté',tipsText:'Des contenus pour mieux comprendre et utiliser vos soins.',contactTitle:'Contact DÉKORA',newsletterTitle:'Newsletter',newsletterText:'Recevez nouveautés, offres et conseils DÉKORA.',footerBrandText:'Ma peau, ma beauté.',footerDescription:'Cosmétiques naturels & authentiques fabriqués en Côte d’Ivoire.',footerShopTitle:'Boutique',footerServiceTitle:'Service',footerInfoTitle:'Informations',navHome:'Accueil',navShop:'Boutique',navCategories:'Catégories',navRoutine:'Ma Routine',navTracking:'Suivi commande',navTips:'Conseils',navContact:'Contact',trust1Title:'🌿 Ingrédients naturels',trust1Text:'Sélectionnés avec soin pour votre peau.',trust2Title:'💧 Formules soignées',trust2Text:'Une expérience beauté sensorielle.',trust3Title:'♡ Résultats visibles',trust3Text:'Des routines simples et ciblées.',trust4Title:'🚚 Livraison CI',trust4Text:'Commande et suivi simplifiés.'};
+ const content=()=>Object.assign({},defaults,read('dekora_content',{}));
+ function apply(){const c=content();
+  const q=s=>document.querySelector(s), qa=s=>Array.from(document.querySelectorAll(s));
+  const text=(s,v)=>{const e=q(s);if(e)e.textContent=v};
+  text('.topbar .wrap span:first-child',c.top1);text('.topbar .wrap span:last-child',c.top2);text('.hero .eyebrow',c.heroEyebrow);text('.hero h1',c.heroTitle);text('.hero p',c.heroText);text('.hero .btn:not(.light)',c.heroBtn1);text('.hero .btn.light',c.heroBtn2);text('#categories h2',c.categoriesTitle);text('#categories .section-head p',c.categoriesText);text('#routine h2',c.routineTitle);text('#routine .routine > div:first-child > p',c.routineText);text('#suivi h2',c.trackingTitle);text('#suivi .section-head p',c.trackingText);text('#conseils h2',c.tipsTitle);text('#conseils .section-head p',c.tipsText);text('#contactForm h2',c.contactTitle);text('#newsletter h2',c.newsletterTitle);text('#newsletter p',c.newsletterText);
+  const footer=q('.footer');if(footer){const ds=footer.querySelectorAll('.footer-grid>div');if(ds[0]){const ps=ds[0].querySelectorAll('p');if(ps[0])ps[0].textContent=c.footerBrandText;if(ps[1])ps[1].textContent=c.footerDescription}if(ds[1])text('.footer-grid>div:nth-child(2) h3',c.footerShopTitle);if(ds[2])text('.footer-grid>div:nth-child(3) h3',c.footerServiceTitle);if(ds[3])text('.footer-grid>div:nth-child(4) h3',c.footerInfoTitle)}
+  const ts=qa('.trust-item');[[c.trust1Title,c.trust1Text],[c.trust2Title,c.trust2Text],[c.trust3Title,c.trust3Text],[c.trust4Title,c.trust4Text]].forEach((v,i)=>{if(ts[i]){const b=ts[i].querySelector('b'),s=ts[i].querySelector('span');if(b)b.textContent=v[0];if(s)s.textContent=v[1]}});
+  qa('[data-nav=home]').forEach(e=>e.textContent=c.navHome);qa('[data-nav=shop]').forEach(e=>e.textContent=c.navShop);qa('[data-nav=categories]').forEach(e=>e.textContent=c.navCategories);qa('[data-nav=routine]').forEach(e=>e.textContent=c.navRoutine);qa('[data-nav=tracking]').forEach(e=>e.textContent=c.navTracking);qa('[data-nav=tips]').forEach(e=>e.textContent=c.navTips);qa('[data-nav=contact]').forEach(e=>e.textContent=c.navContact);
+  const top=q('.topbar');if(top){top.style.backgroundColor=c.topbarColor;top.style.color=c.topbarTextColor} if(c.heroImage){const box=q('.hero-box');if(box)box.style.backgroundImage=`url("${String(c.heroImage).replace(/"/g,'%22')}")`}
+ }
+ function renderArticles(){const sec=document.querySelector('#conseils');if(!sec)return;let grid=sec.querySelector('.tips-live');if(!grid){grid=document.createElement('div');grid.className='tips-live';sec.appendChild(grid)}const a=read('dekora_tips',[]).filter(x=>x&&x.published!==false);if(a.length){grid.innerHTML=a.slice(0,12).map(t=>`<article class="tip-card">${t.image?`<img loading="lazy" src="${esc(t.image)}" alt="${esc(t.title)}">`:''}<span class="pill">${esc(t.category||'Conseil')}</span><h3>${esc(t.title)}</h3><p>${esc(t.body||'')}</p></article>`).join('')}else{grid.innerHTML='<p class="muted">Les conseils DÉKORA seront bientôt disponibles.</p>'}}
+ function refresh(){apply();renderArticles();if(window.renderProducts)window.renderProducts();if(window.renderChips)window.renderChips();if(window.renderCats)window.renderCats()}
+ window.addEventListener('storage',e=>{if(e.key&&/^dekora_/.test(e.key))setTimeout(refresh,20)});document.addEventListener('DOMContentLoaded',()=>setTimeout(refresh,40));
+})();
+</script>
+
 </body></html>
