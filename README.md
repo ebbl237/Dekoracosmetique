@@ -41,12 +41,17 @@ Front Office : `https://ebbl237.github.io/Dekoracosmetique/`
 Administration : `https://ebbl237.github.io/Dekoracosmetique/admin/login.html`
 
 
-## V15 — CMS publication workflow
+## V15.1 — CMS publication workflow consolidé
 - Brouillon séparé de la version publiée
+- Correction de la collecte CMS : les champs réels du formulaire sont utilisés, sans dépendance aux anciens identifiants V14
+- Import logo et Hero fonctionnel dans le brouillon
 - Prévisualisation de la boutique dans une iframe avant publication
 - Validation explicite « Valider & publier »
 - Confirmation visuelle après publication
 - Gestion du logo, Hero, topbar, couleurs, navigation, visibilité et contenus
+- Correction du détail des lignes de commande : affichage depuis `unitPrice`
+- CA / finance excluent les commandes annulées ou remboursées
+- Édition des promotions existantes ajoutée
 - Diagnostic local des briques catalogue, favoris, panier, commandes, suivi, CMS, articles, promotions et catégories
 - Aperçu d'une fiche produit avant enregistrement
 - La version V15 reste un prototype local : localStorage/sessionStorage seront remplacés par Firebase pour la synchronisation multi-appareils.
