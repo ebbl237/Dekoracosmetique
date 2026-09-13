@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#32135f"><title>DÉKORA — Accès Administration</title>
+<style>
+:root{--v:#32135f;--v2:#54238d;--s:#df8e88;--g:#b98b32;--c:#fbf3e9;--w:#fffdf9;--ink:#211a28;--muted:#766b79;--line:#e7d8ca}*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at 15% 15%,#f8e4df 0,transparent 30%),radial-gradient(circle at 90% 85%,#e9dcf4 0,transparent 28%),var(--c);display:grid;place-items:center;padding:24px}.shell{width:min(1080px,100%);display:grid;grid-template-columns:1.08fr .92fr;min-height:650px;background:rgba(255,253,249,.92);border:1px solid #e2d4c9;border-radius:32px;overflow:hidden;box-shadow:0 30px 80px rgba(50,19,95,.18)}.visual{position:relative;padding:54px;background:linear-gradient(145deg,#32135f,#4d2387 55%,#6d3c94);color:white;overflow:hidden}.visual:before,.visual:after{content:"";position:absolute;border-radius:50%;filter:blur(2px)}.visual:before{width:340px;height:340px;right:-120px;top:-100px;background:rgba(223,142,136,.35)}.visual:after{width:420px;height:420px;left:-230px;bottom:-230px;background:rgba(255,255,255,.08)}.brand{font:700 43px Georgia,serif;letter-spacing:5px}.gold{color:#e6c56d;font:700 12px Inter,sans-serif;letter-spacing:3px;margin-top:5px}.visual h1{font:700 clamp(38px,5vw,64px)/1.03 Georgia,serif;max-width:520px;margin:100px 0 22px}.visual p{max-width:470px;line-height:1.7;color:#eee3f4}.security{position:absolute;bottom:42px;left:54px;right:54px;display:flex;gap:12px;align-items:center;font-size:12px;color:#eadcf0}.seal{width:44px;height:44px;border:1px solid rgba(255,255,255,.28);border-radius:14px;display:grid;place-items:center;background:rgba(255,255,255,.08)}.formside{padding:54px;display:flex;flex-direction:column;justify-content:center}.eyebrow{font-size:11px;font-weight:900;letter-spacing:.18em;color:var(--v);text-transform:uppercase}.formside h2{font:700 34px Georgia,serif;color:var(--v);margin:10px 0}.sub{color:var(--muted);line-height:1.6;margin-bottom:28px}.field{margin:16px 0}.field label{display:block;font-size:12px;font-weight:800;margin-bottom:8px;color:#3b2d41}.field input{width:100%;height:52px;border:1px solid var(--line);border-radius:12px;padding:0 15px;background:#fff;outline:none}.field input:focus{border-color:var(--v);box-shadow:0 0 0 4px rgba(50,19,95,.08)}.btn{width:100%;height:54px;border:0;border-radius:13px;background:var(--v);color:#fff;font-weight:900;font-size:15px;cursor:pointer;box-shadow:0 10px 24px rgba(50,19,95,.2)}.btn:hover{background:var(--v2);transform:translateY(-1px)}.back{display:block;text-align:center;margin-top:18px;color:var(--muted);font-size:13px}.error{display:none;margin-top:14px;padding:12px;border-radius:10px;background:#fff0f1;color:#a32945;font-size:13px}.note{margin-top:24px;padding:13px;border:1px solid var(--line);border-radius:12px;background:#fffaf6;color:var(--muted);font-size:11px;line-height:1.5}@media(max-width:800px){.shell{grid-template-columns:1fr;min-height:auto}.visual{min-height:310px;padding:32px}.visual h1{margin:70px 0 12px;font-size:42px}.security{left:32px;right:32px;bottom:24px}.formside{padding:34px 26px}}
+.password-row{display:flex;gap:8px}.password-row input{flex:1}.toggle{border:1px solid #d9c9bc;background:#fff;border-radius:10px;padding:0 12px;color:#32135f;font-weight:700}</style></head><body>
+<div class="shell"><section class="visual"><div class="brand">DÉKORA</div><div class="gold">MA PEAU, MA BEAUTÉ</div><h1>Le cockpit privé de votre marketplace.</h1><p>Pilotage commercial, finances, commandes, stocks, promotions et catalogue réunis dans un espace de gestion premium.</p><div class="security"><div class="seal">✦</div><div>Accès réservé à l'équipe autorisée.<br>Les identifiants ne sont pas affichés sur l'espace public.</div></div></section>
+<section class="formside"><div class="eyebrow">Espace sécurisé</div><h2>Connexion administration</h2><p class="sub">Connectez-vous pour accéder au cockpit de direction et à la gestion opérationnelle DÉKORA.</p><form id="login"><div class="field"><label for="email">Adresse e-mail</label><input id="email" type="email" autocomplete="username" required placeholder="Votre adresse e-mail"></div><div class="field"><label for="password">Mot de passe</label><div class="password-row"><input id="password" type="password" autocomplete="current-password" required placeholder="Votre mot de passe"><button id="togglePass" type="button" class="toggle" onclick="toggleAdminPassword()">Afficher</button></div></div><button class="btn">Accéder au cockpit</button><div id="error" class="error">Identifiants incorrects. Vérifiez vos informations puis réessayez.</div></form><div class="note">Sécurité prototype : l'authentification locale sert uniquement à la validation HTML. Le passage Firebase remplacera cette protection locale par une authentification réelle.</div><a class="back" href="../index.html">← Retour à la boutique</a></section></div>
+<script>
+
+function sha256(ascii){
+  function rr(v,a){return(v>>>a)|(v<<(32-a))}
+  var mp=Math.pow,mw=mp(2,32),L='length',i,j,r='',w=[],bl=ascii[L]*8,h=sha256.h=sha256.h||[],k=sha256.k=sha256.k||[],pc=k[L],comp={};
+  for(var c=2;pc<64;c++)if(!comp[c]){for(i=0;i<313;i+=c)comp[i]=c;h[pc]=(mp(c,.5)*mw)|0;k[pc++]=(mp(c,1/3)*mw)|0}
+  ascii+='\x80';while(ascii[L]%64-56)ascii+='\x00';
+  for(i=0;i<ascii[L];i++){j=ascii.charCodeAt(i);w[i>>2]|=j<<((3-i)%4)*8}
+  w[w[L]]=((bl/mw)|0);w[w[L]]=bl;
+  for(j=0;j<w[L];){var x=w.slice(j,j+=16),oh=h.slice(0);
+    for(i=0;i<64;i++){var a=h[0],e=h[4],x15=x[i-15],x2=x[i-2];
+      var t1=(h[7]+(rr(e,6)^rr(e,11)^rr(e,25))+((e&h[5])^((~e)&h[6]))+k[i]+(x[i]=(i<16?x[i]:(x[i-16]+(rr(x15,7)^rr(x15,18)^(x15>>>3))+x[i-7]+(rr(x2,17)^rr(x2,19)^(x2>>>10)))|0)))|0;
+      var t2=((rr(a,2)^rr(a,13)^rr(a,22))+((a&h[1])^(a&h[2])^(h[1]&h[2])))|0;
+      h=[(t1+t2)|0,a,h[1],h[2],(h[3]+t1)|0,h[4],h[5],h[6]]
+    }
+    for(i=0;i<8;i++)h[i]=(h[i]+oh[i])|0
+  }
+  for(i=0;i<8;i++)for(j=3;j+1;j--){var b=(h[i]>>(j*8))&255;r+=(b<16?'0':'')+b.toString(16)}
+  return r
+}
+function hashPassword(v){return sha256(unescape(encodeURIComponent(String(v))))}
+
+const AUTH_HASH={email:'ebd67184c9624001d0a937e29494c429f0e8c6020d5efbb4fba04e49aa6141ec',pass:'3125049b3503e18b580f41f5d0ee92455309ea786672a377b180fc6c069268c7'};
+function toggleAdminPassword(){const e=document.getElementById('password'),b=document.getElementById('togglePass');const show=e.type==='password';e.type=show?'text':'password';b.textContent=show?'Masquer':'Afficher';}
+document.getElementById('login').addEventListener('submit',e=>{
+  e.preventDefault();
+  const email=hashPassword(document.getElementById('email').value.trim().toLowerCase());
+  const pass=hashPassword(document.getElementById('password').value);
+  const err=document.getElementById('error');
+  if(email===AUTH_HASH.email&&pass===AUTH_HASH.pass){sessionStorage.setItem('dekora_admin','1');location.href='index.html';}
+  else{err.textContent='Identifiants incorrects. Vérifiez l’adresse e-mail et le mot de passe.';err.style.display='block';document.getElementById('password').value='';document.getElementById('password').focus();}
+});
+</script><style id="dekora-v12-login-responsive">@media(max-width:600px){body{padding:12px}.login-card,.login-box,.auth-card{width:100%!important;max-width:430px!important;padding:20px!important}.login-card input,.login-card button,.login-box input,.login-box button{min-height:46px;width:100%}}</style></body></html>
