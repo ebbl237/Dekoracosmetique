@@ -61,7 +61,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}a{text-decoratio
   <div class="side-bottom"><button class="logout" onclick="toast('Déconnexion')">Déconnexion</button></div>
 </aside>
 <main class="main">
-<header class="top"><div><div class="top-title" id="topTitle">Commandes</div><div class="top-sub" id="topSub">Centre de suivi des commandes</div></div><div class="top-actions"><button class="btn" onclick="location.href='../DEKORA_V17.6.html'">Voir la boutique</button><button class="btn primary" onclick="openNewProduct()">+ Article</button></div></header>
+<header class="top"><div><div class="top-title" id="topTitle">Commandes</div><div class="top-sub" id="topSub">Centre de suivi des commandes</div></div><div class="top-actions"><button class="btn" onclick="location.href='../index.html'">Voir la boutique</button><button class="btn primary" onclick="openNewProduct()">+ Article</button></div></header>
 <div id="content" class="page"></div>
 </main>
 </div>
@@ -123,7 +123,7 @@ function products(){const x=read(PROD,defaultProducts);if(!localStorage.getItem(
 function routines(){return read(ROUT,[{skin:'Normale',goal:'Hydratation',frequency:'Hebdomadaire',createdAt:'15/09/2026'},{skin:'Sèche',goal:'Nutrition',frequency:'Quotidienne',createdAt:'14/09/2026'},{skin:'Mixte',goal:'Éclat',frequency:'Hebdomadaire',createdAt:'13/09/2026'}])}
 function money(n){return new Intl.NumberFormat('fr-FR').format(n)+' FCFA'}
 function statusClass(s){return ({'En attente':'pending','Confirmée':'confirmed','Préparation':'preparing','Prête à expédier':'ready','Expédiée':'shipped','Livrée':'delivered','Annulée':'cancelled'})[s]||'confirmed'}
-const statuses=['Nouvelle','En attente','Confirmée','Préparation','Prête à expédier','Expédiée','Livrée','Annulée'];
+const statuses=['En attente de paiement','Payée','Confirmée','En préparation','Prête à expédier','Expédiée','En transit','En livraison','Livrée','Paiement échoué','Annulée','Échec livraison','Retournée','Remboursée'];
 let currentOrderId=null,currentMessageId=null;
 function toast(t){alert(t)}
 function setHeader(title,sub){document.getElementById('topTitle').textContent=title;document.getElementById('topSub').textContent=sub}
@@ -210,4 +210,14 @@ function genericView(v){return `<h1>${esc(v)}</h1><p class="lead">Espace d’adm
 function initAdmin(){document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.style.display='none'}));document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.overlay').forEach(o=>o.style.display='none')});document.getElementById('msgCount').textContent=messages().filter(x=>!x.read).length;render('dashboard')}
 document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>render(b.dataset.view));initAdmin();
 </script>
+<script src="../dekora-core-v1.js"></script>
+<script src="../dekora-services-v1.js"></script>
+<script src="./dekora-auth-v1.js"></script>
+<script src="./dekora-admin-v18-core-bridge.js"></script>
+<script src="../backend/api-client-v1.js"></script>
+
+<!-- DEKORA FIREBASE V1 -->
+<script src="../firebase/firebase-app-v1.js"></script>
+<!-- End DEKORA FIREBASE V1 -->
+
 </body></html>
